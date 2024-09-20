@@ -17,11 +17,19 @@ public class CassandraVectorService {
     VectorStore vectorStore;
 
     public List<Document> transform() {
-           List<Document> documents = List.of(
+        List<Document> documents = List.of(
                 new Document("Spring AI rocks!! Spring AI rocks!! Spring AI rocks!! Spring AI rocks!! Spring AI rocks!!", Map.of("country", "UK", "year", 2020)),
-                new Document("The World is Big and Salvation Lurks Around the Corner", Map.of()),
-                new Document("You walk forward facing the past and you turn back toward the future.", Map.of("country", "NL", "year", 2023))
+                new Document("The World is Big and Salvation Lurks Around the Corner", Map.of("country", "BG", "year", 2018)),
+                new Document("You walk forward facing the past and you turn back toward the future.", Map.of("country", "NL", "year", 2023)),
+                new Document("Exploring the depths of the ocean is like diving into a new world of wonder.", Map.of("country", "USA", "year", 2019)),
+                new Document("Technology shapes the future but leaves our past behind.", Map.of("category", "Technology")),
+                new Document("The evolution of artificial intelligence is transforming industries.", Map.of("category", "Technology", "year", 2021)),
+                new Document("Mountains are the beginning and the end of all natural scenery.", Map.of("country", "CH", "year", 2022)),
+                new Document("Books are a uniquely portable magic.", Map.of("author", "Stephen King", "genre", "Literature")),
+                new Document("The stars are not afraid of the darkness; they only shine brighter.", Map.of("country", "AU", "year", 2021))
         );
+
+
 
         TextSplitter textSplitter = new TokenTextSplitter();
 
@@ -42,7 +50,7 @@ public class CassandraVectorService {
     }
 
     public List<Document> search() {
-        List<Document> results = vectorStore.similaritySearch(SearchRequest.query("Spring").withTopK(2));
+        List<Document> results = vectorStore.similaritySearch(SearchRequest.query("Technology ").withTopK(2));
         return results;
     }
 }
